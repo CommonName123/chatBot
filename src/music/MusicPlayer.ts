@@ -42,6 +42,9 @@ export default class MusicPlayer {
         ['leroy', 0.8],
         ['nenado', 0.1],
         ['nya', 0.45],
+        ['kuda', 0.6],
+        ['gigachad', 0.6],
+        ['espanoles', 0.3],
     ]);
 
     /**
@@ -125,4 +128,22 @@ export default class MusicPlayer {
     public getSongList() {
         return this.audioList.join(' ');
     }
+
+
+    /**
+     * Включает рандомные фразы в рандомное время
+     * можно наполнить массив randomTime интервалами через которые будут проигранны звуковые композиции
+     */
+    public turnOnRandomizer() {
+        const length = this.audioList.length;
+        const randomItem = this.audioList[Math.floor((Math.random() * length))];
+        //const randomTime = [600];
+
+        setTimeout(() => {
+            this.changeSrcAngPlay(randomItem);
+            this.turnOnRandomizer();
+        }, 600 * 1000);
+    }
+
+
 }

@@ -8,6 +8,7 @@ import Commands from "./commands/Commands";
 import {Chat} from "./types/Chat";
 import Cleaner from "./games/Cleaner";
 import Kingdom from "./games/Kingdom";
+import PhrasesDictionary from "./phrases/PhrasesDictionary";
 
 
 /**
@@ -30,7 +31,7 @@ export default class ChatManager {
     /**
      * Чат ГГ
      */
-    // public ggchat: GGChat = new GGChat()
+    public ggchat: GGChat = new GGChat()
 
 
     /**
@@ -74,6 +75,20 @@ export default class ChatManager {
                 this.commandModule.bossBattle = this.bossBattle;
             })
             .catch(error => console.log(error));
+
+        setTimeout(() => {
+            this.announceInChat();
+        }, 600000);
+    }
+
+
+    /**
+     * Делать анонс в чат в случайный момент времени
+     */
+    public announceInChat() {
+        const randomItem = PhrasesDictionary[Math.floor((Math.random() * PhrasesDictionary.length))];
+        this.twitchChat.announce(randomItem);
+        setTimeout(()=>{this.announceInChat()}, 600000);
     }
 
 
@@ -110,6 +125,11 @@ export default class ChatManager {
         list.appendChild(newCard);
 
         list.scrollTop = list.scrollHeight;
+
+        setTimeout(() => {
+            list.removeChild(newCard);
+            newCard.remove();
+        }, 10000);
     }
 
 
@@ -126,11 +146,12 @@ export default class ChatManager {
             this.musicPlayer.changeSong(command);
         }
         this.sendMessageInDb(context, message);
-        // if (chat.chatType === "GG") {
-        //     msg = this.ggchat.createCard(context, message);
-        // } else {
-        const msg = this.twitchChat.createCard(context, message);
-        // }
+        let msg;
+        //if (chat.chatType === "GG") {
+        //    msg = this.ggchat.createCard(context, message);
+        //} else {
+        msg = this.twitchChat.createCard(context, message);
+        //}
         this.createCard(msg)
     }
 

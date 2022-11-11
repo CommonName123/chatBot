@@ -22,6 +22,12 @@ export default class TwitchChat extends Chat{
 
     public manager:ChatManager;
 
+    /**
+     * Указатель на канал
+     * @private
+     */
+    private chatChannel = 'oladyshekx';
+
 
 
     /**
@@ -71,7 +77,15 @@ export default class TwitchChat extends Chat{
      * @param msg
      */
     public announce(msg: string) {
-        this.client.say('oladyshekx', msg);
+        this.client.say(this.chatChannel, msg);
+    }
+
+    /**
+     * Таймаут
+     * @param msg
+     */
+    public timeout(username: string,time:number,reason:string) {
+        this.client.timeout(this.chatChannel,username, time, reason);
     }
 
     /**

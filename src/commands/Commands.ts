@@ -66,7 +66,7 @@ export default class Commands {
      * Последние изменения в чатботе
      * @private
      */
-    private changelog = "Новая игра 'Королество', однако чат пустует и функционал до конца не проверить";
+    private changelog = "Добавили пару рандомайзеров чатботу";
 
     public messageService: (command: string, context: Context, message: string, chat: Chat) => void = null;
 
@@ -102,6 +102,7 @@ export default class Commands {
         ['!radio', new Command('что сейчас играет', this.getCurrentTrack.bind(this))],
         ['!clean', new Command('убрать "мусор"', this.clean.bind(this))],
         ['!вкатун', new Command('типичные вопросы', this.vkatun.bind(this))],
+        ['!turnonrandom', new Command('включить рандомайзер звуков', this.turnOnRandomizer.bind(this))],
     ]);
 
 
@@ -171,6 +172,14 @@ export default class Commands {
     private vkatun(target: string, context: Context, msg: string, args: any){
         this.chat.announce("Чел, если ты задал один из типичных вопросов а-ля \"Как войти в ОЙТИ? Какой язык выбрать? и т д\" то в данном случае - никак." +
             "Очевидно ты не изучил предметную область и не поймёшь о чём спрашиваешь...погугли чел.");
+    }
+
+    /**
+     * Включить рандомайзер звуков в musicPlayer'е
+     * @private
+     */
+    private turnOnRandomizer(){
+        this.musicPlayer.turnOnRandomizer();
     }
 
 
