@@ -88,7 +88,7 @@ export default class ChatManager {
     public announceInChat() {
         const randomItem = PhrasesDictionary[Math.floor((Math.random() * PhrasesDictionary.length))];
         this.twitchChat.announce(randomItem);
-        setTimeout(()=>{this.announceInChat()}, 600000);
+        setTimeout(()=>{this.announceInChat()}, 1200000);
     }
 
 
